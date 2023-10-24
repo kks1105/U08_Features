@@ -10,6 +10,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Materials/Material.h"
+#include "Materials/MaterialInstanceDynamic.h"
 #include "Global.h"
 #include "Engine/World.h"
 
@@ -58,11 +59,22 @@ AU08_FeatureCharacter::AU08_FeatureCharacter()
 	PrimaryActorTick.bStartWithTickEnabled = true;
 }
 
+
+void AU08_FeatureCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	UMaterialInstanceDynamic::Create(GetMesh()->GetMaterial(0), nullptr);
+	GetMesh()->SetMaterial(0, DynamicMaterial);
+
+
+}
+
 void AU08_FeatureCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
 
-	if (CursorToWorld != nullptr)
+	if (CursorToWorld != nullptr)//데칼
 	{
 		if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled())
 		{
@@ -91,7 +103,10 @@ void AU08_FeatureCharacter::Tick(float DeltaSeconds)
 		}
 	}
 
-	
+	CheckNull(DynamicMaterial);//다이나믹머티리얼체크
+	DynamicMaterial->SetScalarParameterValue("Amount", GetVelocity().Size() * 0.15f);//어마운트에(흩날리는길이) 이동벨롭시티에0.15곱함
+	DynamicMaterial->SetVectorParameterValue("Direction", -GetVelocity().GetSafeNormal());//다이렉션에(흩날리는방향) 이동의반대방향의 노멀라이즈
 
 
 }
+
