@@ -64,8 +64,10 @@ void AU08_FeatureCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	UMaterialInstanceDynamic::Create(GetMesh()->GetMaterial(0), nullptr);
+	DynamicMaterial = UMaterialInstanceDynamic::Create(GetMesh()->GetMaterial(0), nullptr);
 	GetMesh()->SetMaterial(0, DynamicMaterial);
+
+	
 
 
 }
