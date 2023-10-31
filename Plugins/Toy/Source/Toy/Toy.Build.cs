@@ -22,6 +22,7 @@ public class Toy : ModuleRules
 			"EditorStyle",
 			"LevelEditor",
 			"Projects",
+			"GameplayDebugger"
 
 		}
 		);

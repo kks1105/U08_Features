@@ -14,6 +14,8 @@ private:
 	TSharedPtr<FExtender> Extender; //FExtender* Extender 
 	
 private:
-	void AddToolBar(class FToolBarBuilder& InToolBarBuilder);
+	void AddToolBar_SpawnVertex(class FToolBarBuilder& InToolBarBuilder);
+	void AddToolBar_OpenViewer(class FToolBarBuilder& InToolBarBuilder);
+
 
 };

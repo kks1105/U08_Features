@@ -15,9 +15,14 @@ public:
 
 private:
 	void SpawnVertexButton_Pressed();//버튼눌렀을때 액션
+	void OpenViewerButton_Pressed(); //오픈뷰어버튼 액션
 
 public:
 	TSharedPtr<FUICommandInfo> SpawnVertexButton;//uicommand 버튼객체저장될위치
+	TSharedPtr<FUICommandInfo> OpenViewerButton; //오픈뷰어에쓰는거
+
+
+	
 	TSharedPtr<FUICommandList> SpawnVertexCommand;//버튼액션실행내용
 
 
