@@ -5,6 +5,8 @@
 #include "ToolBar/ButtonCommand.h"
 #include "ToolBar/IconStyle.h"
 #include "DebuggerCategory/DebuggerCategory.h"
+#include "DetailPanel/DetailsButton.h"
+//#include "RHI/CButtonActor.h"
 
 
 
@@ -45,6 +47,13 @@ void FToyModule::StartupModule()
 		gameplayDebugger.NotifyCategoriesChanged();//정렬하려고 호출
 
 
+
+	}
+
+	//DetailPanel_Button
+	{
+		//FPropertyEditorModule& properyEditor = FModuleManager::LoadModuleChecked<FProperty>;
+		//properyEditor.RegisterCustomClassLayout(ACButtonActor::StaticClass()->GetName(),FOnGetDetailCustomizationInstance::CreateStatic(&FDetailsButton::MakeInstance));
 
 	}
 
