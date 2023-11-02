@@ -6,7 +6,7 @@
 #include "ToolBar/IconStyle.h"
 #include "DebuggerCategory/DebuggerCategory.h"
 #include "DetailPanel/DetailsButton.h"
-//#include "RHI/CButtonActor.h"
+#include "RHI/CButtonActor.h"
 
 
 
@@ -52,8 +52,8 @@ void FToyModule::StartupModule()
 
 	//DetailPanel_Button
 	{
-		//FPropertyEditorModule& properyEditor = FModuleManager::LoadModuleChecked<FProperty>;
-		//properyEditor.RegisterCustomClassLayout(ACButtonActor::StaticClass()->GetName(),FOnGetDetailCustomizationInstance::CreateStatic(&FDetailsButton::MakeInstance));
+		FPropertyEditorModule& properyEditor = FModuleManager::LoadModuleChecked<FPropertyEditorModule>("PropertyEditor");//PropertyEditor가져오기(디테일패널관련)
+		properyEditor.RegisterCustomClassLayout(ACButtonActor::StaticClass()->GetName(),FOnGetDetailCustomizationInstance::CreateStatic(&FDetailsButton::MakeInstance));//추가할곳넣기 클래스이름,딜리게이트
 
 	}
 
