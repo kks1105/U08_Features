@@ -7,6 +7,7 @@
 #include "DebuggerCategory/DebuggerCategory.h"
 #include "DetailPanel/DetailsButton.h"
 #include "RHI/CButtonActor.h"
+#include "Viewer/MeshViewer.h"
 
 
 
@@ -69,7 +70,7 @@ void FToyModule::ShutdownModule()
 
 
 	FIconStyle::Shutdown();//아이콘스타일의 셧다운실행(인스턴스변수 초기화)
-
+	MeshViewer::Shutdown();
 }
 
 

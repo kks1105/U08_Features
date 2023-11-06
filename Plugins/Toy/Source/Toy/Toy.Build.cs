@@ -26,6 +26,7 @@ public class Toy : ModuleRules
 			"PropertyEditor",
 			"MainFrame",
 			"DesktopPlatform",
+			"UnrealEd",
 			"U08_Feature",
 
 		}

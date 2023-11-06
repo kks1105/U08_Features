@@ -9,6 +9,7 @@
 #include "IDesktopPlatform.h"
 #include "Serialization/BufferArchive.h"
 #include "Interfaces/IMainFrameModule.h"
+#include "Misc/FileHelper.h"
 
 TSharedRef<class IDetailCustomization> FDetailsButton::MakeInstance()
 {
