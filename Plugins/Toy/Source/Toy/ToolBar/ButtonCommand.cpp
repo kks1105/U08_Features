@@ -135,7 +135,7 @@ void FButtonCommand::SpawnVertexButton_Pressed()
 void FButtonCommand::OpenViewerButton_Pressed()
 {
 	//UE_LOG(LogTemp, Warning, TEXT("Open Viewer Button is Pressed")); //출력
-	FMeshViewer::OpenWindow(NewObject<>);//Meshviewer의 오픈윈도우
-
+	//FMeshViewer::OpenWindow();//Meshviewer의 오픈윈도우
+	FMeshViewer::OpenWindow(NewObject<UCDetailAsset>());//Meshviewer의 오픈윈도우 만든디테일패널내용인오브젝트타입인 CDetailAsset
 
 }

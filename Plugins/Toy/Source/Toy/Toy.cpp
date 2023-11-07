@@ -70,7 +70,7 @@ void FToyModule::ShutdownModule()
 
 
 	FIconStyle::Shutdown();//아이콘스타일의 셧다운실행(인스턴스변수 초기화)
-	MeshViewer::Shutdown();
+	FMeshViewer::Shutdown();//fmeshviewer의 셧다운실행(초기화)
 }
 
 
