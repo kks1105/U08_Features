@@ -1,5 +1,7 @@
 
 #include "MeshViewer.h"
+#include "MeshViewer_Viewport.h"
+#include "AdvancedPreviewSceneModule.h"
 
 TSharedPtr<FMeshViewer> FMeshViewer::Instance = nullptr;
 const static FName ToolkitName = TEXT("MeshViewer");
@@ -32,6 +34,19 @@ void FMeshViewer::Shutdown()
 
 void FMeshViewer::OpenWindow_Internal(UObject* InAsset)
 {
+	//create slatewidget
+	ViewportWidget = SNew(SMeshViewer_Viewport);//메쉬뷰어뷰포트 만들기
+
+	FAdvancedPreviewSceneModule& previewSceneSettings = FModuleManager::LoadModuleChecked<FAdvancedPreviewSceneModule>("AdvancedPreviewScene");  //프리뷰씬모듈가져오기
+
+	PreviewSceneSettingsWidget = previewSceneSettings.CreateAdvancedPreviewSceneSettingsWidget(ViewportWidget->GetScene()); //프리뷰씬만들기
+
+	FPropertyEditorModule& properyEditor = FModuleManager::LoadModuleChecked<FPropertyEditorModule>("PropertyEditor"); //디테일패널모듈가져오기
+	FDetailsViewArgs args(false,false,true,FDetailsViewArgs::ObjectsUseNameArea);//디테일패널세팅
+	DetailsViewWidget = properyEditor.CreateDetailView(args);//만들기 디테일패널
+	DetailsViewWidget->SetObject(InAsset);//세팅
+
+
 	//creat layout
 	TSharedRef<FTabManager::FLayout> layout = FTabManager::NewLayout("MeshViewer_Layout")
 		->AddArea
@@ -100,6 +115,11 @@ void FMeshViewer::RegisterTabSpawners(const TSharedRef<FTabManager>& InTabManage
 	FOnSpawnTab viewportSpawnEvent = FOnSpawnTab::CreateSP(this, &FMeshViewer::Spawn_ViewportTab);//딜리게이트
 	TabManager->RegisterTabSpawner(ViewportTabID, viewportSpawnEvent);//레이아웃에서 탭아이디를가져와구별하고 
 
+	FOnSpawnTab previewSpawnEvent = FOnSpawnTab::CreateSP(this, &FMeshViewer::Spawn_PreviewSceneSettingsTab);//딜리게이트
+	TabManager->RegisterTabSpawner(PreviewTabID, previewSpawnEvent);//레이아웃에서 탭아이디를가져와구별하고 
+
+	FOnSpawnTab detailsSpawnEvent = FOnSpawnTab::CreateSP(this, &FMeshViewer::Spawn_DetailsViewTab);//딜리게이트
+	TabManager->RegisterTabSpawner(DetailsTabID, detailsSpawnEvent);//레이아웃에서 탭아이디를가져와구별하고 
 
 }
 
@@ -110,8 +130,24 @@ TSharedRef<SDockTab> FMeshViewer::Spawn_ViewportTab(const FSpawnTabArgs& InArgs)
 
 	return SNew(SDockTab)
 		[
-			SNew(SButton)
-			.Text(FText::FromString("Test"))
+			ViewportWidget.ToSharedRef()//탭에뷰포트붙음
+		]; //뷰포트에 SDockTab이붙음 (slate위젯으로붙이는거다할수있음)
+}
+
+TSharedRef<SDockTab> FMeshViewer::Spawn_PreviewSceneSettingsTab(const FSpawnTabArgs& InArgs)
+{
+	return SNew(SDockTab)
+		[
+			PreviewSceneSettingsWidget.ToSharedRef()//2프리뷰
+		]; //뷰포트에 SDockTab이붙음 (slate위젯으로붙이는거다할수있음)
+}
+
+TSharedRef<SDockTab> FMeshViewer::Spawn_DetailsViewTab(const FSpawnTabArgs& InArgs)
+{
+
+	return SNew(SDockTab)
+		[
+			DetailsViewWidget.ToSharedRef()//3디테일
 		]; //뷰포트에 SDockTab이붙음 (slate위젯으로붙이는거다할수있음)
 }
 
