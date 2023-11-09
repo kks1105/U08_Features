@@ -30,6 +30,7 @@ public class Toy : ModuleRules
 			"U08_Feature",
 			"AdvancedPreviewScene",
 			"InputCore",
+			"AssetTools",
 
 		}
 		);

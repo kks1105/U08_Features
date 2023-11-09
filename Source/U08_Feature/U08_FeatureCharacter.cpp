@@ -13,6 +13,7 @@
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Global.h"
 #include "Engine/World.h"
+#include "AssetTools/CAsset.h"
 
 AU08_FeatureCharacter::AU08_FeatureCharacter()
 {
@@ -57,6 +58,17 @@ AU08_FeatureCharacter::AU08_FeatureCharacter()
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
+
+
+	ConstructorHelpers::FObjectFinder<UCAsset> asset(TEXT("CAsset'/Game/BluePrints/Asset001.Asset001'"));
+	if (asset.Succeeded())
+	{
+		//UE_LOG(LogTemp, Waring,TEXT("Name: %s"), *asset.Object->GetName().ToString());
+		//UE_LOG(LogTemp, Waring,TEXT("Mesh: %s"), *asset.Object->GetShape());
+		//UE_LOG(LogTemp, Waring,TEXT("DropRate: %f"), asset.Object->GetDropRate());
+
+
+	}
 }
 
 

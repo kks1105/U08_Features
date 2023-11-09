@@ -8,6 +8,8 @@
 #include "DetailPanel/DetailsButton.h"
 #include "RHI/CButtonActor.h"
 #include "Viewer/MeshViewer.h"
+#include "AssetToolsModule.h"
+#include "AssetTools/CAssetAction.h"
 
 
 
@@ -58,6 +60,15 @@ void FToyModule::StartupModule()
 	
 	}
 
+	//AssetTypeAction
+	{
+		IAssetTools& assetTools = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools").Get();//모듈가져오기
+		//EAssetTypeCategories::Type category = EAssetTypeCategories::Misc;//기타카테고리에추가
+		EAssetTypeCategories::Type category = assetTools.RegisterAdvancedAssetCategory(FName("MyKey"),FText::FromString("AwsomeCategory"));//새로운카테고리생성 후추가
+		AssetTypeActions = MakeShareable(new CAssetAction(category));//만들기
+		assetTools.RegisterAssetTypeActions(AssetTypeActions.ToSharedRef());
+
+	}
 
 }
 

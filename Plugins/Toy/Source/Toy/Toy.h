@@ -17,5 +17,6 @@ private:
 
 private:
 	TSharedPtr<FExtender> Extender; //FExtender* Extender 
+	TSharedPtr<class IAssetTypeActions> AssetTypeActions; //¿¡¼Â¿¢¼Ç
 
 };
